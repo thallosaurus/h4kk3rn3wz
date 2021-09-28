@@ -1,0 +1,15 @@
+{
+  "name": "h4kk3rn3wz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "node-html-parser": "^4.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "scripts": {
+    "start": "nodemon ."
+  }
+}
