@@ -1,13 +1,27 @@
-module.exports = function(text) {
+const url = require("url");
+
+module.exports = function(text, req) {
+    
+    const queryObject = url.parse(req.url, true).query;
+    
     const unpacked = text.split("");
     for (const u in unpacked) {
-        unpacked[u] = translate(unpacked[u]);
+        switch((queryObject.mode)) {
+            case "heavy":
+                unpacked[u] = translate_(unpacked[u]);
+                break;
+
+            case "mild":
+            default:
+                unpacked[u] = translate(unpacked[u]);
+                break;
+        }
     }
 
     return unpacked.join("");
 }
 
-function translate(c) {
+function translate_(c) {
     switch (c.toUpperCase()) {
         case "A":
             return "4";
@@ -86,6 +100,30 @@ function translate(c) {
 
         case "Z":
             return "2";
+    }
+
+    return c;
+}
+
+function translate(c) {
+    switch (c.toUpperCase()) {
+        case "A":
+            return "4";
+
+        case "O":
+            return "0";
+
+        case "E":
+            return "3";
+
+        case "I":
+            return "!";
+
+        case "T":
+            return "7";
+
+        case "L":
+            return "1";
     }
 
     return c;
